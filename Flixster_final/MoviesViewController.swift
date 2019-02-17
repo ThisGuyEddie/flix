@@ -1,12 +1,13 @@
 //
 //  MoviesViewController.swift
-//  Flixster_final
+//  Flixster
 //
-//  Created by Kevin Pham on 1/31/19.
-//  Copyright © 2019 Kevin Pham. All rights reserved.
+//  Created by Eddie Rodriguez on 1/31/19.
+//  Copyright © 2019 Eddie Rodriguez. All rights reserved.
 //
 
 import UIKit
+//import Alamofire
 import AlamofireImage
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -22,7 +23,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         
         // Do any additional setup after loading the view.
-        print("Hello")
+//        print("Hello")
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -72,14 +73,27 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+ //    MARK: - Navigation
+
+//     In a storyboard-based application, you will often want to do a little preparation before navigation
+        override func prepare(for segue:
+            UIStoryboardSegue, sender: Any?) {
+//        Get the new view controller using segue.destination.
+//         Pass the selected object to the new view controller.
+            
+            // Find the selected movie
+            let cell = sender as! UITableViewCell
+            let indexpath = tableView.indexPath(for: cell)!
+            let movie = movies [indexpath.row]
+            let detailsViewController = segue.destination as! MovieDetailsViewController
+            detailsViewController.movie = movie
+            
+            tableView.deselectRow(at: indexpath, animated: true)
+            
+            // Pass the selected movie to the details view controller
+            
     }
-    */
+
 
 }
